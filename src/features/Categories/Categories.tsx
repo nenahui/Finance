@@ -40,7 +40,7 @@ export const Categories: React.FC = () => {
     categories.length <= 0 ? (
       <Text type={'secondary'}>The list of categories is empty</Text>
     ) : (
-      categories.map((category) => <CategoryItem key={category.id} category={category} />)
+      categories.map((category) => <CategoryItem key={category.id} category={category} />).reverse()
     );
 
   return (

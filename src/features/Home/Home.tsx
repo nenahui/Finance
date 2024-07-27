@@ -15,13 +15,15 @@ export const Home: React.FC = () => {
   const categories = useAppSelector(selectCategories);
   const isFetching = useAppSelector(selectIsFetching);
 
-  const allTransactions = transactions.map((item) => {
-    const category = categories.find((cat) => cat.id === item.category) as Category;
-    return {
-      ...category,
-      ...item,
-    };
-  });
+  const allTransactions = transactions
+    .map((item) => {
+      const category = categories.find((cat) => cat.id === item.category) as Category;
+      return {
+        ...category,
+        ...item,
+      };
+    })
+    .reverse();
 
   useEffect(() => {
     dispatch(fetchCategories());
