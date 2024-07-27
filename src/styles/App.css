@@ -30,3 +30,14 @@
 .fz-16 {
   font-size: 16px !important;
 }
+
+.statistic {
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 4px 20px;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.w-100 {
+  width: 100%;
+}

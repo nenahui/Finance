@@ -10,3 +10,9 @@ export interface Category extends ApiCategory {
 export interface ApiCategories {
   [id: string]: ApiCategory;
 }
+
+export interface ApiTransaction {
+  category: string;
+  amount: number;
+  createdAt: string;
+}
