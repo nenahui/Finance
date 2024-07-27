@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap');
+
 *,
 *::before,
 *::after {
@@ -17,6 +19,10 @@
   padding: 1rem;
 }
 
-.fz-18 {
-  font-size: 18px !important;
+.fz-22 {
+  font-size: 22px !important;
+}
+
+.logo {
+  font-family: 'Dancing Script', cursive !important;
 }
