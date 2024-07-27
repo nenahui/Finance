@@ -62,9 +62,11 @@ export const Home: React.FC = () => {
 
       <Flex gap={'middle'} vertical>
         {isFetching && <Spin className={'a-centered'} />}
-        {allTransactions.map((transaction) => (
-          <TransactionItem key={transaction.id} transaction={transaction} />
-        ))}
+        {allTransactions.map((transaction) => {
+          if (transaction.name) {
+            return <TransactionItem key={transaction.id} transaction={transaction} />;
+          }
+        })}
       </Flex>
       <Outlet />
     </Flex>
