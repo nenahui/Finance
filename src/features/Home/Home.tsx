@@ -33,9 +33,9 @@ export const Home: React.FC = () => {
   const totalPrice = () => {
     let totalSum = 0;
     allTransactions.forEach((item) => {
-      if (item.type === 'income') {
+      if (item.type === 'income' && item.name) {
         totalSum += item.amount;
-      } else {
+      } else if (item.type === 'expense' && item.name) {
         totalSum -= item.amount;
       }
 
