@@ -28,13 +28,29 @@ export const Home: React.FC = () => {
     dispatch(fetchTransaction());
   }, [dispatch]);
 
-  console.log(allTransactions);
+  const totalPrice = () => {
+    let totalSum = 0;
+    allTransactions.forEach((item) => {
+      if (item.type === 'income') {
+        totalSum += item.amount;
+      } else {
+        totalSum -= item.amount;
+      }
+    });
+
+    return totalSum;
+  };
 
   return (
     <Flex gap={'large'} vertical>
       <Flex justify={'space-between'} align={'center'}>
         <Card size={'small'}>
-          <Statistic title='Total' value={630} valueStyle={{ color: '#52c41a' }} suffix='KGS' />
+          <Statistic
+            title='Total'
+            value={totalPrice()}
+            valueStyle={{ color: '#52c41a' }}
+            suffix='KGS'
+          />
         </Card>
       </Flex>
 

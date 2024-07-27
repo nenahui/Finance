@@ -3,12 +3,17 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { selectCategories } from '../../features/Categories/categoriesSlice';
-import { fetchCategories } from '../../features/Categories/categoriesThunks';
+import { editTransaction, fetchTransaction } from '../../features/Home/homeThunks';
 import { selectIsCreating } from '../../features/NewTransaction/newTransactionSlice';
 import { createTransaction } from '../../features/NewTransaction/newTransactionThunks';
-import type { ApiTransaction, Category } from '../../types';
+import type { ApiTransaction, Category, FullTransaction } from '../../types';
 
-export const TransactionForm: React.FC = () => {
+interface Props {
+  formType: 'create' | 'edit';
+  transaction?: FullTransaction;
+}
+
+export const TransactionForm: React.FC<Props> = ({ formType, transaction }) => {
   const categories = useAppSelector(selectCategories);
   const isCreating = useAppSelector(selectIsCreating);
   const dispatch = useAppDispatch();
@@ -18,25 +23,45 @@ export const TransactionForm: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchCategories());
-  }, [dispatch]);
+    if (formType === 'edit' && transaction) {
+      form.setFieldsValue({
+        category: transaction.id,
+        createdAt: transaction.createdAt,
+        amount: transaction.amount,
+      });
+      setType(transaction.type);
+    }
+  }, [form, formType, transaction]);
 
   const onChange = (type: string) => {
     form.setFieldValue('category', null);
     setType(type);
 
-    const transactions = categories.filter((t) => t.type === type);
+    const transactions = categories.filter((cat) => cat.type === type);
     setFilteredTransactions(transactions);
   };
 
   const onSubmit = async (data: ApiTransaction) => {
     const date = new Date();
-    await dispatch(
-      createTransaction({
-        ...data,
-        createdAt: date.toISOString(),
-      })
-    );
+    if (formType === 'create') {
+      await dispatch(
+        createTransaction({
+          ...data,
+          createdAt: date.toISOString(),
+        })
+      );
+    }
+
+    if (formType === 'edit' && transaction) {
+      await dispatch(
+        editTransaction({
+          ...data,
+          id: transaction.id,
+        })
+      );
+    }
+
+    dispatch(fetchTransaction());
     navigate('/');
   };
 

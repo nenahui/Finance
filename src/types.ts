@@ -21,7 +21,7 @@ export interface ApiTransactions {
   [id: string]: ApiTransaction;
 }
 
-export interface Transactions extends ApiTransaction {
+export interface Transaction extends ApiTransaction {
   id: string;
 }
 

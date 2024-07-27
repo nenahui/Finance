@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { Transactions } from '../../types';
-import { fetchTransaction } from './homeThunks';
+import type { Transaction } from '../../types';
+import { deleteTransaction, fetchTransaction } from './homeThunks';
 
 export interface homeState {
-  transactions: Transactions[];
+  transactions: Transaction[];
   isFetching: boolean;
+  isDeleting: boolean;
 }
 
 const initialState: homeState = {
   transactions: [],
   isFetching: false,
+  isDeleting: false,
 };
 
 export const homeSlice = createSlice({
@@ -28,11 +30,23 @@ export const homeSlice = createSlice({
       .addCase(fetchTransaction.rejected, (state) => {
         state.isFetching = false;
       });
+
+    builder
+      .addCase(deleteTransaction.pending, (state) => {
+        state.isDeleting = true;
+      })
+      .addCase(deleteTransaction.fulfilled, (state) => {
+        state.isDeleting = false;
+      })
+      .addCase(deleteTransaction.rejected, (state) => {
+        state.isDeleting = false;
+      });
   },
   selectors: {
     selectIsFetching: (state) => state.isFetching,
     selectTransactions: (state) => state.transactions,
+    selectIsDeleting: (state) => state.isDeleting,
   },
 });
 
-export const { selectIsFetching, selectTransactions } = homeSlice.selectors;
+export const { selectIsFetching, selectTransactions, selectIsDeleting } = homeSlice.selectors;

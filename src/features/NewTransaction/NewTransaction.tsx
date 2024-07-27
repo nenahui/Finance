@@ -21,7 +21,7 @@ export const NewTransaction: React.FC = () => {
         footer={null}
         title={'Add Expense/Income'}
       >
-        <TransactionForm />
+        <TransactionForm formType={'create'} />
       </Modal>
     </>
   );
