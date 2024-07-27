@@ -16,3 +16,7 @@
   margin: 0 auto;
   padding: 1rem;
 }
+
+.fz-18 {
+  font-size: 18px !important;
+}
