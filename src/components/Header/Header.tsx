@@ -9,20 +9,12 @@ type MenuItem = Required<MenuProps>['items'][number];
 
 const items: MenuItem[] = [
   {
-    label: (
-      <Link style={{ fontSize: 12 }} to={'/categories'}>
-        Categories
-      </Link>
-    ),
+    label: <Link to={'/categories'}>Categories</Link>,
     key: 'categories',
     icon: <OrderedListOutlined />,
   },
   {
-    label: (
-      <Link style={{ fontSize: 12 }} to={'/add'}>
-        Add
-      </Link>
-    ),
+    label: <Link to={'/add'}>Add</Link>,
     key: 'add',
     icon: <PlusCircleOutlined />,
   },
@@ -43,7 +35,7 @@ export const Header = () => {
   };
 
   return (
-    <Flex justify={'space-between'} align={'center'}>
+    <Flex justify={'space-between'} align={'center'} style={{ marginBottom: 10 }}>
       <Text className={'fz-22 logo'} onClick={navigateHome}>
         Finance Tracker
       </Text>

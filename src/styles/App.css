@@ -20,9 +20,13 @@
 }
 
 .fz-22 {
-  font-size: 22px !important;
+  font-size: 20px !important;
 }
 
 .logo {
   font-family: 'Dancing Script', cursive !important;
+}
+
+.fz-16 {
+  font-size: 16px !important;
 }
