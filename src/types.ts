@@ -16,3 +16,17 @@ export interface ApiTransaction {
   amount: number;
   createdAt: string;
 }
+
+export interface ApiTransactions {
+  [id: string]: ApiTransaction;
+}
+
+export interface Transactions extends ApiTransaction {
+  id: string;
+}
+
+export interface FullTransaction extends ApiTransaction {
+  id: string;
+  name: string;
+  type: 'income' | 'expense';
+}
