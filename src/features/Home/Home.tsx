@@ -36,6 +36,10 @@ export const Home: React.FC = () => {
       } else {
         totalSum -= item.amount;
       }
+
+      if (totalSum <= 0) {
+        totalSum = 0;
+      }
     });
 
     return totalSum;
